@@ -1,0 +1,40 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+th, td{
+    padding: 15px 50px;
+    border: 1px solid #000;
+}
+.edit {
+    box-sizing: border-box; /* включим border и padding в размеры элемента */
+    /* margin: 0; */        /* у textarea по умолчанию margin равен нулю */
+    display: block;
+    resize: none;
+}
+.btn {
+    margin: 15px 10px 10px 10px;
+}
+.top {
+    display: flex;
+    flex-direction: row;
+}
+.textarea {
+    position: absolute;
+    height: 20%;
+    width: 25%;
+    margin-left: 15%;
+}
+.buttoncontainer {
+    display: flex;
+    flex-direction: column;
+}
+.bottom {
+    display: flex;
+    width: 45%;
+    justify-content: flex-end;
+}

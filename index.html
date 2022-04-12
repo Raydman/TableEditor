@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Editor</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <h1>Примитивный редактор табличных данных</h1>
+    <div class="main">
+        <div class="top">
+            <div id="editor">
+                <table id="tab">
+                    <thead>
+                        <tr>
+                            <th>
+                                First name
+                            </th>
+                            <th>
+                                Last name
+                            </th>
+                            <th>
+                                Age
+                            </th>
+                            <th>
+                                Salary
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- <tr id="row"><td>f</td></tr> -->
+                </table>
+            </div>
+            <div>
+                <!-- <input class="textarea" id="textarea" type="text"
+                    placeholder="[{'firstName':'firstName1', 'lastName'='lastName1'...}]"> -->
+                <textarea class="textarea" id="textarea"></textarea>
+                <div class="buttoncontainer">
+                    <button id="loadButton">Загрузить в таблицу</button>
+                    <button id="loadBackButton">Выгрузить из таблицы</button>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div></div>
+            <button class="btn">+</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <noscript>You need to enable JavaScript to view the full site.</noscript>
+</body>
+
+</html>
