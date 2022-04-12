@@ -1,7 +1,14 @@
+// variables and getters
+
 let newTable = document.querySelector('#editor')
 let table2 = document.getElementById('tab');
 const switcher = document.querySelector('.btn');
+let placeholder = '[{"firstname":"firstName1","lastname":"lastName1","age":"21","salary":"1000$"}]'
+let jsonInput = document.getElementById('textarea')
+let loadButton = document.getElementById('loadButton');
+let loadBackButton = document.getElementById('loadBackButton');
 
+// Functions
 
 function createTable(parent, cols, rows) { // функция создания таблицы
     let table = document.getElementById('tab');
@@ -26,6 +33,48 @@ function createTable(parent, cols, rows) { // функция создания т
     }
     parent.appendChild(table);
 }
+
+function tableCreate(parent, data) {
+    
+    let table = document.getElementById('tab');
+    data.map((item) => {
+        let tr = document.createElement('tr');
+        tr.id = "row";
+        tr.innerHTML = `<td id="firstname">${item.firstname}</td>
+        <td id="lastname">${item.lastname}</td>
+        <td id="age">${item.age}</td>
+        <td id="salary">${item.salary}</td>`
+
+        let button = document.createElement('button'); // создание кнопки удаления в таблице
+        button.innerHTML = "X";
+        tr.appendChild(button)
+        table.appendChild(tr);
+
+        button.addEventListener("click", function (e) { // обработчик события удаления
+            let buttonElement = e.target; // элемент который вызвал функцию
+            ell = buttonElement.closest("tr"); // tr element 
+            ell.parentElement.removeChild(ell)
+        })
+    })
+    parent.appendChild(table);
+}
+
+const loadFromTable = (table) => {
+    let database = [];
+    for (let i = 1; (row = table.rows[i]); i++) {
+    database.push({
+        firstname: row.cells[0].innerText, 
+        lastname: row.cells[1].innerText, 
+        age: row.cells[2].innerText, 
+        salary: row.cells[3].innerText 
+    });
+    }
+    if (database.length > 0) {
+        jsonInput.value = JSON.stringify(database);
+    }
+}
+
+// Event listeners:
 
 switcher.addEventListener('click', function () { // кнопка вызова функции создания таблицы
     createTable(newTable, 4, 1)
@@ -56,10 +105,6 @@ table2.addEventListener("click", function (event) { // обработчик со
     })
 });
 
-let placeholder = "[{'firstName':'firstName1', 'lastName'='lastName1'...}]"
-let jsonInput = document.getElementById('textarea')
-
-
 jsonInput.addEventListener('click', () => {
     jsonInput.placeholder = "";
 })
@@ -68,77 +113,11 @@ jsonInput.addEventListener('blur', () => {
     jsonInput.placeholder = placeholder;
 })
 
-
-let myJson = '[{"firstname": "bob", "lastname": "Dilan", "age":"21", "salary":"2000$"}]'
-let newData = JSON.parse(myJson);
-console.log(newData);
-let toJson = [{ firstname: "bob", lastname: "Dilan", age: "21", salary: "2000$" }, { firstname: "dean", lastname: "Dilan", age: "21", salary: "2000$" }]
-let updData = JSON.stringify(toJson)
-console.log(updData);
-
-let finalData = toJson.map(item => item.firstname)
-console.log(finalData);
-
-
-// //////////////////////////////////////////////////////////////////////////////
-
-let loadButton = document.getElementById('loadButton');
-
-function tableCreate(parent, data) {
-    
-    let table = document.getElementById('tab');
-    data.map((item) => {
-        let tr = document.createElement('tr');
-        tr.id = "row";
-        // for (let i = 0; i < 4; i++) {
-        //     let td = document.createElement("td");
-        //     td.id = "col"
-        //     tr.appendChild(td);
-        // }
-        tr.innerHTML = `<td id="firstname">${item.firstname}</td>
-        <td id="lastname">${item.lastname}</td>
-        <td id="age">${item.age}</td>
-        <td id="salary">${item.salary}</td>`
-
-        let button = document.createElement('button'); // создание кнопки удаления в таблице
-        button.innerHTML = "X";
-        tr.appendChild(button)
-        table.appendChild(tr);
-
-        button.addEventListener("click", function (e) { // обработчик события удаления
-            let buttonElement = e.target; // элемент который вызвал функцию
-            ell = buttonElement.closest("tr"); // tr element 
-            ell.parentElement.removeChild(ell)
-        })
-    })
-    parent.appendChild(table);
-}
-
-// console.log(jsonParser(myJson));
-// console.log(typeof(jsonInput.value));
-
 loadButton.addEventListener('click', () => {
     let pushToTable = JSON.parse(jsonInput.value)
     tableCreate(newTable, pushToTable)
 })
 
-console.log(table2.rows);
-
-let loadBackButton = document.getElementById('loadBackButton');
-
-function variant2(table) { // Современный синтаксис
-    //Массив соответствующий строкам таблицы
-    var arrayOfTrValues = [];
-    for (let row of table.rows) {
-        let obj = {};
-        for (let column of row.cells)
-            obj[column.getAttribute("name")] = column.textContent;
-        arrayOfTrValues.push(obj);
-    }
-    console.log(arrayOfTrValues);
-}
-
-
 loadBackButton.addEventListener('click', () => {
-    variant2(table2)
+    loadFromTable(table2)
 })
