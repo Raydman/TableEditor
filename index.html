@@ -7,47 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table Editor</title>
     <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="translate.js"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
 </head>
 
 <body>
-    <h1>Примитивный редактор табличных данных</h1>
+    <div class="language">
+        <img src="/myTableEditor/images/lang/lang__ru.png" alt="ru" data-google-lang="ru" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__en.png" alt="en" data-google-lang="en">
+        <img src="/myTableEditor/images/lang/lang__de.png" alt="de" data-google-lang="de" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__fr.png" alt="fr" data-google-lang="fr" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__pt.png" alt="pt" data-google-lang="pt" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__es.png" alt="es" data-google-lang="es" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__it.png" alt="it" data-google-lang="it" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__zh.png" alt="zh" data-google-lang="zh-CN" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__ar.png" alt="ar" data-google-lang="ar" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__nl.png" alt="nl" data-google-lang="nl" class="language__img">
+        <img src="/myTableEditor/images/lang/lang__sv.png" alt="sv" data-google-lang="sv" class="language__img">
+    </div>
+    <h1 class="h1">Примитивный редактор табличных данных</h1>
     <div class="main">
         <div class="top">
             <div id="editor">
                 <table id="tab">
-                    <thead>
+                    <thead id="thead">
                         <tr>
                             <th>
-                                First name
+                                Имя
                             </th>
                             <th>
-                                Last name
+                                Фамилия
                             </th>
                             <th>
-                                Age
+                                Возраст
                             </th>
                             <th>
-                                Salary
+                                Зарплата
                             </th>
                         </tr>
                     </thead>
-                    <!-- <tr id="row"><td>f</td></tr> -->
                 </table>
             </div>
-            <div>
-                <!-- <input class="textarea" id="textarea" type="text"
-                    placeholder="[{'firstName':'firstName1', 'lastName'='lastName1'...}]"> -->
-                <textarea class="textarea" id="textarea" placeholder='[{"firstname":"firstName1","lastname":"lastName1","age":"21","salary":"1000$"}]'></textarea>
+            <div class="bottom">
+                <div></div>
+                <button class="btn">+</button>
+            </div>
+            <div class="right-container">
+                <textarea class="textarea" id="textarea"
+                    placeholder='[{"firstname":"firstName1","lastname":"lastName1","age":"21","salary":"1000$"}]'></textarea>
                 <div class="buttoncontainer">
-                    <button id="loadButton">Загрузить в таблицу</button>
-                    <button id="loadBackButton">Выгрузить из таблицы</button>
+                    <button class="loadButton" id="loadButton">Загрузить в таблицу</button>
+                    <button class="loadBackButton" id="loadBackButton">Выгрузить из таблицы</button>
+                    <p>Импортировать JSON из файла:</p>
+                    <input type="file" id="file">
+                    <a class="btn-link" id="link" href="">Выгрузить в файл</a>
                 </div>
             </div>
         </div>
-        <div class="bottom">
-            <div></div>
-            <button class="btn">+</button>
-        </div>
+        
     </div>
     <script src="app.js"></script>
     <noscript>You need to enable JavaScript to view the full site.</noscript>

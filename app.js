@@ -121,3 +121,54 @@ loadButton.addEventListener('click', () => {
 loadBackButton.addEventListener('click', () => {
     loadFromTable(table2)
 })
+
+
+
+
+var fileInput = document.querySelector('input[type="file"]');
+var tableIn = '';
+
+
+if(window.File && window.FileReader && window.FileList && window.Blob)
+{
+  fileInput.addEventListener('change', read, false);
+}
+
+function read(evt)
+{
+		var reader = new FileReader();
+        console.log(reader);
+    var files = evt.target.files;
+    console.log(files);
+    for (var i = 0, f; f = files[i]; i++)
+    {
+			reader.onload = function(event)
+      {
+      	var result = event.target.result;
+        console.log(result);
+       	result = result.split('\n');
+        let pushToTable = JSON.parse(result)
+        console.log(pushToTable);
+        tableCreate(newTable, pushToTable)
+      }
+      reader.readAsText(f);
+    }
+}
+
+let link = document.getElementById('link')
+link.addEventListener('click', () => {
+    let database = [];
+    for (let i = 1; (row = table2.rows[i]); i++) {
+    database.push({
+        firstname: row.cells[0].innerText, 
+        lastname: row.cells[1].innerText, 
+        age: row.cells[2].innerText, 
+        salary: row.cells[3].innerText 
+    });
+    }
+    let updDatabase = JSON.stringify(database)
+    link.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent(updDatabase);
+    link.innerHtml = 'Open the text file';
+    //set default action on link to force download, and set default filename:
+    link.download = 'table.txt';     
+})
